@@ -1,11 +1,11 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY BlazorServerWithDocker.csproj .
+COPY ["BlazorServerWithDocker.csproj", "."]
 RUN dotnet restore "BlazorServerWithDocker.csproj"
 COPY . .
 RUN dotnet build "BlazorServerWithDocker.csproj" -c Release -o /app/build
